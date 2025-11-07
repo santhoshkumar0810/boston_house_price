@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Boston Housing Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}" />
+  </head>
+  <body>
+    <div class="card">
+      <h2>🏠 Boston Housing Price Prediction</h2>
+      <form method="post" id="predictForm">
+        {% for f in
+        ["CRIM","ZN","INDUS","CHAS","NOX","RM","AGE","DIS","RAD","TAX","PTRATIO","B","LSTAT"]
+        %}
+        <div class="form-group">
+          <label>{{ f }}</label>
+          <input name="{{ f }}" type="number" step="any" required />
+        </div>
+        {% endfor %}
+        <button type="submit">Predict</button>
+      </form>
+
+      {% if prediction is not none %}
+      <div class="result fade-in">
+        <strong>Predicted Price: {{ prediction }}</strong>
+      </div>
+      {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', path='script.js') }}"></script>
+  </body>
+</html>
